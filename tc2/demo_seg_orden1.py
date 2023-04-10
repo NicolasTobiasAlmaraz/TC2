@@ -15,16 +15,17 @@ import numpy as np
 # Librería de TC2, esta la vas a usar mucho
 from pytc2.sistemas_lineales import pzmap, GroupDelay, bodePlot
 
-w0 = 1
-qq = np.sqrt(2)/2
+R1 = 1*(10**3)
+R2 = 1*(10**3)
+R3 = 1*(10**3)
+C = 1*(10**-6)
 
-my_tf = TransferFunction( [w0**2], [1, w0/qq, w0**2] )
+
+my_tf = TransferFunction( [1, -R2/(C*R1*R3)], [1, 1/(C*R3)] )
 
 
 plt.close('all')
 
-bodePlot(my_tf, fig_id=1, filter_description = 'Q={:3.3f}'.format(qq) )
+bodePlot(my_tf, fig_id=1 )
 
-pzmap(my_tf, fig_id=2, filter_description = 'Q={:3.3f}'.format(qq)) #S plane pole/zero plot
-
-GroupDelay(my_tf, fig_id=3, filter_description = 'Q={:3.3f}'.format(qq))
+pzmap(my_tf, fig_id=2 )
